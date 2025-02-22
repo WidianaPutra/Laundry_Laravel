@@ -13,7 +13,7 @@ class Layout extends Component
      */
     public $title;
     public $showNavbar;
-    public function __construct($title = 'title', $navbar = 'hide')
+    public function __construct($title = 'title', $navbar = 'show')
     {
         $this->title = $title;
         $this->showNavbar = $navbar;

@@ -19,15 +19,16 @@ class CookieModel extends Model
     {
         return Cookie::queue(Cookie::forget($key));
     }
-    public static function setUserCookie($id, $username, $email)
+    public static function setUserCookie($id, $username, $email, $role)
     {
         self::setCookie('id', $id);
         self::setCookie('username', $username);
         self::setCookie('email', $email);
+        self::setCookie('role', $role);
     }
     public static function CheckCookie()
     {
-        if (self::getCookie('user_id') && self::getCookie('username') && self::getCookie('email')) {
+        if (self::getCookie('user_id') && self::getCookie('username') && self::getCookie('email') && self::getCookie('role')) {
             return true;
         }
         return false;

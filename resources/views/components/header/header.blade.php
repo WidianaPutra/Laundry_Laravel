@@ -5,7 +5,5 @@
     <title>{{ $slot }}</title>
     {{-- <x-tailwindcss></x-tailwindcss> --}}
     @vite(['resources/css/app.css', 'resources/js/app.js'])
-
-    <link rel="stylesheet" href="./libs/aos.css">
-
+    <link rel="stylesheet" href="./css/index.css">
 </head>
