@@ -37,11 +37,16 @@ class UserController extends Controller
     if ($upload['status'] === 400) {
       return redirect('/reg')->with('error', $upload['error']);
     }
-    CookieModel::setUserCookie($upload['data']['user_id'], $upload['data']['username'], $upload['data']['email']);
+    CookieModel::setUserCookie($upload['data']['user_id'], $upload['data']['username'], $upload['data']['email'], $upload['role']);
 
     if (!CookieModel::CheckCookie()) {
       return redirect('/reg')->with('error', 'Please try again');
     }
     return redirect('/');
+  }
+
+  public function show(Request $request, $email)
+  {
+
   }
 }

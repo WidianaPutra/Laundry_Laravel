@@ -11,6 +11,24 @@ class Navbar extends Component
     /**
      * Create a new component instance.
      */
+    public $navLinks = [
+        [
+            'name' => 'menu 1',
+            'url' => '/'
+        ],
+        [
+            'name' => 'menu 2',
+            'url' => '/'
+        ],
+        [
+            'name' => 'menu 3',
+            'url' => '/'
+        ],
+        [
+            'name' => 'menu 4',
+            'url' => '/'
+        ],
+    ];
     public function __construct()
     {
         //
@@ -21,6 +39,7 @@ class Navbar extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.navbar.navbar');
+        return view('components.navbar.navbar', ['navLinks' => $this->navLinks]);
     }
 }
+

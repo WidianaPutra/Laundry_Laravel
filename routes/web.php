@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Middleware\CheckRole;
 use Illuminate\Support\Facades\Route;
 use App\Models\CookieModel;
 
@@ -12,12 +13,16 @@ use App\Http\Controllers\View\LandingPageController;
 use App\Http\Controllers\UserController;
 
 // 
-// if (!(CookieModel::getCookie('id') && CookieModel::getCookie('username'))) {
-Route::get('/', [LoginController::class, 'index']);
-Route::get('/register', [RegisterController::class, 'index']);
-// } else {
+if (!CookieModel::CheckCookie()) {
+  Route::get('/', [LoginController::class, 'index']);
+  Route::get('/register', [RegisterController::class, 'index']);
+}
+
 Route::get('/landingpage', [LandingPageController::class, 'index']);
-// }
+
+Route::middleware([CheckRole::class . ':admin'])->group(function () {
+  //
+});
 
 // api
 Route::prefix('/api')->group(function () {

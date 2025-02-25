@@ -10,9 +10,23 @@ class LandingPageController extends Controller
     public $data;
     public function index()
     {
-        $this->data = '
-        Seringkah Anda terjebak situasi darurat: pakaian kotor menumpuk sebelum acara penting, atau harus menghadiri meeting bisnis tapi baju andal belum siap dicuci? Ini masalah nyata bagi keluarga sibuk, pelancong dinas, atau tamu hotel yang butuh solusi cepat.
-        ';
+        $this->data = [
+            [
+                'name' => 'Laundry Cepat',
+                'icon' => './assets/icon/laundry.svg',
+                'text' => ''
+            ],
+            [
+                'name' => 'Strika Rapi',
+                'icon' => './assets/icon/Cloth.svg',
+                'text' => ''
+            ],
+            [
+                'name' => 'Paket',
+                'icon' => './assets/icon/box.svg',
+                'text' => ''
+            ]
+        ];
         return view('landingPage', ['data' => $this->data]);
     }
 }
