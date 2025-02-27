@@ -1,7 +1,6 @@
 <div class="bg-white h-[70px] w-full flex justify-between items-center px-[6%] absolute">
-    <div>
-        {{-- <div class="logo w-[50px] h-[50px] bg-green-500 rounded-full"></div> --}}
-        <h1 class="font-bold text-[35px]">Atelier</h1>
+    <div class="flex gap-2">
+        <img src="./assets/icons/logo.svg" alt="" class="h-[50px] rounded-[10px]">
     </div>
     <div class="flex gap-4">
         @foreach ($navLinks as $navlink)

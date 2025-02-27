@@ -13,19 +13,19 @@ class Navbar extends Component
      */
     public $navLinks = [
         [
-            'name' => 'menu 1',
+            'name' => 'Beranda',
             'url' => '/'
         ],
         [
-            'name' => 'menu 2',
+            'name' => 'Laundry',
             'url' => '/'
         ],
         [
-            'name' => 'menu 3',
+            'name' => 'Riwayat',
             'url' => '/'
         ],
         [
-            'name' => 'menu 4',
+            'name' => 'Akun',
             'url' => '/'
         ],
     ];

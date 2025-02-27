@@ -14,20 +14,12 @@ class CheckRole
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    // public function handle(Request $request, Closure $next, ...$roles): Response
-    // {
-    //     $userRole = CookieModel::getCookie('role');
-    //     if (in_array($userRole, $roles)) {
-    //         return redirect('/')->with('err', 'Unauthorized');
-    //     }
-    //     return $next($request);
-    // }
-    public function handle(Request $request, Closure $next, ...$role): Response
+    public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        if (in_array($role, $role)) {
-            return redirect('/unauthorized')->with('error', 'Anda tidak memiliki akses!');
+        $userRole = CookieModel::getCookie('role');
+        if (in_array($userRole, $roles)) {
+            return redirect('/')->with('err', 'Unauthorized');
         }
-
         return $next($request);
     }
 }

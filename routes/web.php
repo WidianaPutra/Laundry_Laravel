@@ -9,10 +9,7 @@ use App\Http\Controllers\View\LoginController;
 use App\Http\Controllers\View\RegisterController;
 use App\Http\Controllers\View\LandingPageController;
 
-// controller Api
-use App\Http\Controllers\UserController;
 
-// 
 if (!CookieModel::CheckCookie()) {
   Route::get('/', [LoginController::class, 'index']);
   Route::get('/register', [RegisterController::class, 'index']);
@@ -24,7 +21,12 @@ Route::middleware([CheckRole::class . ':admin'])->group(function () {
   //
 });
 
+Route::middleware([CheckRole::class . ':user'])->group(function () {
+  //
+});
+
 // api
 Route::prefix('/api')->group(function () {
-  Route::resource('/user/{email?}', UserController::class);
+  Route::resource('/register', App\Http\Controllers\RegisterController::class);
+  Route::resource('/login', App\Http\Controllers\LoginController::class);
 });

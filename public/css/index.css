@@ -1,10 +1,15 @@
 .bg-image {
     background-image: linear-gradient(
-            rgba(50, 50, 50, 0.55),
-            rgba(50, 50, 50, 0.55)
+            rgba(50, 50, 50, 0.75),
+            rgba(50, 50, 50, 0.75)
         ),
         url("/assets/images/bg-image.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
+}
+
+.z-index {
+    position: relative Im !important;
+    z-index: 10 !important;
 }

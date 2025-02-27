@@ -1,13 +1,14 @@
 <x-layout :title="'login'" :navbar="'hide'">
-    <div class="flex w-full h-screen justify-center items-center bg-gray-100">
-        <div class="flex w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
+    <div class="flex w-full h-screen justify-center items-center bg-gray-100 p-7">
+        <div class="flex flex-col sm:flex-row w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
             <!-- Left Side -->
-            <div class="w-1/2 bg-gradient-to-r from-blue-500 to-blue-700 flex flex-col items-center justify-center p-10">
-                <h2 class="text-white font-bold">Welcome Back!</h2>
+            <div
+                class="sm:w-1/2 w-full bg-cover bg-center bg-[url('{{ asset('assets/images/laundry.jpg') }}')] flex flex-col items-center justify-center p-10">
+                <h2 class="text-white font-bold text-[25px]">Welcome Back!</h2>
             </div>
 
             <!-- Right Side -->
-            <div class="w-1/2 p-10">
+            <div class="sm:w-1/2 w-full p-10">
                 <h2 class="text-2xl font-semibold text-gray-700 text-center">Login</h2>
                 <p class="text-gray-500 text-center mb-6">Welcome back! Please login to your account.</p>
 
