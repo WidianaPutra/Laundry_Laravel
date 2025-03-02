@@ -14,24 +14,34 @@ class Navbar extends Component
     public $navLinks = [
         [
             'name' => 'Beranda',
-            'url' => '/'
+            'url' => '/',
+            'icon' => './assets/icons/home.svg',
         ],
         [
             'name' => 'Laundry',
-            'url' => '/'
+            'url' => '/',
+            'icon' => './assets/icons/laundry.svg',
+
         ],
         [
             'name' => 'Riwayat',
-            'url' => '/'
+            'url' => '/',
+            'icon' => './assets/icons/history.svg',
         ],
         [
             'name' => 'Akun',
-            'url' => '/'
+            'url' => '/',
+            'icon' => './assets/icons/account.svg',
         ],
     ];
     public function __construct()
     {
         //
+    }
+
+    public function getMenu(): array
+    {
+        return $this->navLinks;
     }
 
     /**

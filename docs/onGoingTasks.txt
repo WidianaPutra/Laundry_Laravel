@@ -1,0 +1,5 @@
+1. Dashboard User UI (/Laundry)
+   - History Order (Semua riwayat order dari user termasuk status order)
+   - Tombol untuk membuat order
+      * ketika tombol diklik, maka muncul menu untuk memilih paket laundry, dan Payment Method.
+2. 

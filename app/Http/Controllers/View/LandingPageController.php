@@ -4,11 +4,13 @@ namespace App\Http\Controllers\View;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\View\Component\Navbar;
 
 class LandingPageController extends Controller
 {
     public $values;
-    public function index()
+    public $footer;
+    public function __construct()
     {
         $this->values = [
             [
@@ -42,6 +44,41 @@ class LandingPageController extends Controller
                 'text' => 'Pakaian Wangi, rapi, dan bebas bau tidak sedap untuk tampilan yang selalu sempurna! '
             ]
         ];
-        return view('landingPage', ['values' => $this->values]);
+        $this->footer = [
+            'description' => 'Atelier Laundry adalah layanan laundry profesional yang menawarkan pencucian, pengeringan, dan penyetrikaan pakaian. Kami menggunakan deterjen berkualitas tinggi menjaga kebersihan dan keawetan pakaian pelanggan',
+            'social' => [
+                ['name' => 'Instagram', 'icon' => './assets/icons/socials/instagram.svg'],
+                ['name' => 'Facebook', 'icon' => './assets/icons/socials/facebook.svg'],
+                ['name' => 'X', 'icon' => './assets/icons/socials/x.svg'],
+            ],
+            'contact' => ['Jl. AmbaRuwo No 7, Badung, Bali.', '0858584681007', 'AtelierLaundry@gmail.com'],
+            'menus' => [
+                [
+                    'name' => 'Beranda',
+                    'url' => '/',
+                    'icon' => './assets/icons/home.svg',
+                ],
+                [
+                    'name' => 'Laundry',
+                    'url' => '/',
+                    'icon' => './assets/icons/laundry.svg',
+
+                ],
+                [
+                    'name' => 'Riwayat',
+                    'url' => '/',
+                    'icon' => './assets/icons/history.svg',
+                ],
+                [
+                    'name' => 'Akun',
+                    'url' => '/',
+                    'icon' => './assets/icons/account.svg',
+                ],
+            ]
+        ];
+    }
+    public function index()
+    {
+        return view('landingPage', ['values' => $this->values, 'footer' => $this->footer]);
     }
 }

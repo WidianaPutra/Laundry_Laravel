@@ -15,7 +15,7 @@ if (!CookieModel::CheckCookie()) {
   Route::get('/register', [RegisterController::class, 'index']);
 }
 
-Route::get('/landingpage', [LandingPageController::class, 'index']);
+Route::get('/', [LandingPageController::class, 'index']);
 
 Route::middleware([CheckRole::class . ':admin'])->group(function () {
   //

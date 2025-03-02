@@ -2,6 +2,7 @@
 <html lang="en">
 <x-header>{{ $title }}</x-header>
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <body>
 
@@ -19,12 +20,6 @@
     <script>
         AOS.init({
             once: true
-        });
-
-        document.addEventListener("DOMContentLoaded", function() {
-            document.querySelectorAll("[data-aos]").forEach((el) => {
-                el.style.zIndex = "10";
-            });
         });
     </script>
 </body>

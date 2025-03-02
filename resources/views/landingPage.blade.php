@@ -22,7 +22,7 @@
 
     {{-- about page --}}
     <div
-        class="min-h-[80vh] flex justify-center items-center md:my-12 lg:my-24 bg-center bg-contain bg-no-repeat bg-[url({{ asset('./assets/images/RectangleGreen.png') }})]">
+        class="min-h-[75vh] flex justify-center items-center md:my-12 lg:my-24 bg-center bg-contain bg-no-repeat bg-[url({{ asset('./assets/images/RectangleGreen.png') }})]">
         <div class="sm:w-[86%] sm:min-h-[70vh] md:flex md:items-center justify-center">
             <div class="w-full md:w-[50%] flex justify-center md::justify-end items-center" data-aos='fade-right'
                 data-aos-duration='1500' data-aos-delay="200" data-aos-one="true">
@@ -90,7 +90,7 @@
 
     {{-- value page --}}
     <div
-        class="flex md:flex-row flex-col w-full min-h-[65vh] justify-center md:justify-end bg-center bg-contain bg-no-repeat bg-gray-50 my-10 bg-[url({{ asset('./assets/images/g.png') }})]">
+        class="flex md:flex-row flex-col w-full min-h-[60vh] justify-center md:justify-end bg-center bg-contain bg-no-repeat bg-gray-50 my-10 bg-[url({{ asset('./assets/images/g.png') }})]">
         <div class="md:w-[50%] w-full h-auto grid place-items-center pl-3">
             <div class="w-[89%]">
                 <h1 class="font-bold text-[18px] py-2 text-green-500" data-aos='fade-right' data-aos-duration='1000'
@@ -105,23 +105,25 @@
             </div>
         </div>
         <div class="md:w-[50%] w-full h-auto grid place-items-center my-7 md:my-0">
-            <div class="grid grid-cols-3 gap-8 md:w-[80%] w-[90%]">
+            <div class="grid grid-cols-3 gap-8 md:w-[80%] w-[90%] mt-10 md:mt-0">
                 @foreach ($values as $i => $value)
-                    <div class="flex justify-center items-center relative group z-[99] " data-aos="zoom-in"
-                        data-aos-duration='1000' data-aos-delay='{{ 300 + 300 * $i }}' style="z-index: 99;">
+                    <div class="flex justify-center items-center relative group container-values-card"
+                        data-aos="zoom-in" data-aos-duration="1000" data-aos-delay="{{ 300 + 300 * $i }}">
+
                         <div
-                            class="flex flex-col items-center justify-center bg-white px-5 py-3 shadow-2xl w-[150px] aspect-square rounded-[10px] cursor-pointer z-10">
+                            class="flex flex-col items-center justify-center bg-white px-5 py-3 shadow-2xl w-[150px] aspect-square rounded-[10px] cursor-pointer relative z-10">
                             <img src="{{ asset($value['icon']) }}" alt="" class="aspect-square h-[40px] mb-2">
                             <h1 class="text-center text-[15px]">{{ $value['name'] }}</h1>
                         </div>
+
                         <div
-                            class="absolute w-[0px] h-[0px] aspect-square bg-white shadow-2xl transition-all duration-700 ease-in-out rounded-[10px]
-                             overflow-hidden flex justify-center items-center flex-col p-2 group-hover:w-[230px]  group-hover:h-[200px] cursor-pointer group-hover:z-[9999]
-                             @if ($i % 3 === 0) left-0 @endif
-                             @if ($i % 3 === 2) right-0 @endif sm:left-auto sm:right-auto">
+                            class="absolute w-[200px] sm:w-[230px] aspect-square scale-0 bg-white shadow-2xl transition-all duration-700 ease-in-out rounded-[10px] 
+                            overflow-hidden flex justify-center items-center flex-col p-2
+                            cursor-pointer opacity-0 group-hover:opacity-100 z-[50] group-hover:scale-100
+                            @if ($i % 3 === 0) left-0 @endif @if ($i % 3 === 2) right-0 @endif sm:left-auto sm:right-auto">
                             <img src="{{ asset($value['icon']) }}" alt="" class="aspect-square h-[40px]">
-                            <h1 class="text-center text-[18px]">{{ $value['name'] }}</h1>
-                            <p class="text-center text-[15px]">{{ $value['text'] }}</p>
+                            <h1 class="text-center text-[18px] sm:text-[18px]">{{ $value['name'] }}</h1>
+                            <p class="text-center text-[12px] sm:text-[15px]">{{ $value['text'] }}</p>
                         </div>
                     </div>
                 @endforeach
@@ -135,8 +137,47 @@
     </div>
 
     {{-- footer --}}
-    <footer class="w-full h-[20vh]">
-        <h1>test</h1>
+    <footer
+        class="w-full h-auto mt-5 bg-gray-300 text-black py-10 px-5 md:px-10 flex flex-wrap gap-8 md:gap-0 justify-between">
+        <div class="w-full md:w-1/4 space-y-3">
+            <img src="./assets/icons/logo.svg" alt="Logo" class="w-[200px]">
+            <div class="w-[50%] md:w-[70%] ">
+                <p class="text-[10px] text-justify">{{ $footer['description'] }}</p>
+            </div>
+        </div>
+
+        <div class="w-full md:w-1/4 space-y-3">
+            <p class="font-semibold text-lg">Social</p>
+            <div class="space-y-2">
+                @foreach ($footer['social'] as $data)
+                    <div class="flex items-center gap-3">
+                        <img src="{{ $data['icon'] }}" alt="{{ $data['name'] }}" class="w-5 h-5">
+                        <p class="text-black text-sm">{{ $data['name'] }}</p>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <div class="w-full md:w-1/4 space-y-3">
+            <p class="font-semibold text-lg">Menu</p>
+            <div class="flex flex-col space-y-2 text-black text-sm">
+                @foreach ($footer['menus'] as $data)
+                    <div class="flex gap-2">
+                        <img src="{{ $data['icon'] }}" alt="" class="w-[20px]">
+                        <a href="{{ $data['url'] }}" class="hover:underline transition">{{ $data['name'] }}</a>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
+        <div class="w-full md:w-1/4 space-y-3">
+            <p class="font-semibold text-lg">Contact</p>
+            <div class="text-black text-sm space-y-2">
+                @foreach ($footer['contact'] as $data)
+                    <p>{{ $data }}</p>
+                @endforeach
+            </div>
+        </div>
     </footer>
 </x-layout>
 
@@ -149,22 +190,9 @@
     })
 
     new Typed('#value_tagline', {
-        strings: ["Kepuasan anda <br> adalah tanggung jawab kami"],
+        strings: ["Kepuasan anda <br> adalah prioritas kami"],
         showCursor: false,
         typeSpeed: 50,
         startDelay: 800
     })
 </script>
-
-
-
-{{-- @foreach ($values as $i => $value)
-    <div>
-        <div class="div1">
-
-        </div>
-        <div class="div2">
-
-        </div>
-    </div>
-@endforeach --}}
