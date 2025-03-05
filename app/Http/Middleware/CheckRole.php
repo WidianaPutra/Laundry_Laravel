@@ -17,12 +17,14 @@ class CheckRole
     public function handle(Request $request, Closure $next, string $roles): Response
     {
         $userRole = CookieModel::getCookie('role');
-        $allowedRoles = explode(',', $roles); // Konversi string ke array
+        $allowedRoles = explode(',', $roles);
 
         if (!in_array($userRole, $allowedRoles)) {
-            return redirect('/')->with('err', 'Unauthorized'); // Bisa diganti dengan abort(403);
+            if (!CookieModel::CheckCookie() && $roles === 'user') {
+                return redirect('/')->with('err', 'Unauthorized');
+            }
+            return redirect('/')->with('err', 'Unauthorized');
         }
-
         return $next($request);
     }
 }

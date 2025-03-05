@@ -4,12 +4,12 @@
 <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<body>
+<body class="bg-gray-50">
 
     @if ($navbar == 'show')
         <x-navbar></x-navbar>
     @endif
-    <div class="bg-gray-50">
+    <div>
         {{ $slot }}
     </div>
 

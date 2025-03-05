@@ -13,7 +13,7 @@ class header extends Component
      */
     public $title;
 
-    public function __construct($title = 'title')
+    public function __construct($title = 'Atelier Laundry')
     {
         //
         $this->title = $title;

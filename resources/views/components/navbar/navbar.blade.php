@@ -1,4 +1,4 @@
-<div class="w-full min-h-[70px]">
+<div class="w-full min-h-[70px] shadow-2xl">
     <div class="bg-white h-[70px] w-full flex justify-between items-center px-[6%]">
         {{-- logo --}}
         <div class="flex gap-2">
