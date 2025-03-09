@@ -6,9 +6,16 @@
         </div>
         {{-- nav links --}}
         <div class="hidden sm:flex gap-4">
-            @foreach ($navLinks as $navlink)
-                <a href="{{ $navlink['url'] }}" class="text-black font-bold">{{ $navlink['name'] }}</a>
-            @endforeach
+            @if ($isLogin)
+                @foreach ($navLinks as $navlink)
+                    <a href="{{ $navlink['url'] }}" class="text-black font-bold">{{ $navlink['name'] }}</a>
+                @endforeach
+            @else
+                <a href="{{ route('auth_page', ['random_string' => $auth_url['login']]) }}"
+                    class="bg-green-500 text-white py-2 px-4 rounded-[5px] w-max">Login</a>
+                <a href="{{ route('auth_page', ['random_string' => $auth_url['register']]) }}"
+                    class="bg-green-500 text-white py-2 px-4 rounded-[5px] w-max">Register</a>
+            @endif
         </div>
 
         {{-- humberger --}}
@@ -18,12 +25,22 @@
     <div class="sm:hidden flex flex-col gap-4 w-full bg-white absolute right-0 justify-between items-center z-[9999] pb-2 transition-all duration-700 h-0 overflow-hidden"
         id="nav-link-container">
         <div class="flex flex-col w-full mt-2 h-max gap-1">
-            @foreach ($navLinks as $i => $navlink)
-                <div class="flex w-full justify-between h-[55px] items-center px-5 cursor-pointer hover:bg-gray-200">
-                    <a href="{{ $navlink['url'] }}" class="text-black text-[18px]">{{ $navlink['name'] }}</a>
-                    <img src="{{ asset($navlink['icon']) }}" alt="" class="w-[30px]">
+            @if ($isLogin)
+                @foreach ($navLinks as $i => $navlink)
+                    <div
+                        class="flex w-full justify-between h-[55px] items-center px-5 cursor-pointer hover:bg-gray-200">
+                        <a href="{{ $navlink['url'] }}" class="text-black text-[18px]">{{ $navlink['name'] }}</a>
+                        <img src="{{ asset($navlink['icon']) }}" alt="" class="w-[30px]">
+                    </div>
+                @endforeach
+            @else
+                <div class="flex flex-col gap-4 w-full justify-center px-5 cursor-pointer mt-5">
+                    <a href="{{ route('auth_page', ['random_string' => $auth_url['login']]) }}"
+                        class="bg-green-500 text-white py-2 px-4 rounded-[5px] w-max">Login</a>
+                    <a href="{{ route('auth_page', ['random_string' => $auth_url['register']]) }}"
+                        class="bg-green-500 text-white py-2 px-4 rounded-[5px] w-max">Register</a>
                 </div>
-            @endforeach
+            @endif
         </div>
     </div>
 </div>

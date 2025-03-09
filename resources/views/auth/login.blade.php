@@ -34,7 +34,9 @@
                     <button type="submit"
                         class="w-full bg-blue-400 hover:bg-blue-600 text-white py-2 rounded-lg transition">Login</button>
                 </form>
-                <p class="mt-4 text-center text-gray-600">New User? <a href="/register" class="text-blue-500">Signup</a>
+                <p class="mt-4 text-center text-gray-600">New User? <a
+                        href="{{ route('auth_page', ['random_string' => session('auth_url.register')]) }}"
+                        class="text-blue-500">Signup</a>
                 </p>
             </div>
 

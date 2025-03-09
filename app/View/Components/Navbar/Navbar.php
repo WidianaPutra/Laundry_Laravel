@@ -5,6 +5,7 @@ namespace App\View\Components\Navbar;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
+use App\Models\CookieModel;
 
 class Navbar extends Component
 {
@@ -34,14 +35,12 @@ class Navbar extends Component
             'icon' => './assets/icons/account.svg',
         ],
     ];
+    public $isLogin;
+    public $auth_url;
     public function __construct()
     {
-        //
-    }
-
-    public function getMenu(): array
-    {
-        return $this->navLinks;
+        $this->isLogin = CookieModel::CheckCookie();
+        $this->auth_url = session('auth_url');
     }
 
     /**
@@ -49,7 +48,7 @@ class Navbar extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.navbar.navbar', ['navLinks' => $this->navLinks]);
+        return view('components.navbar.navbar', ['navLinks' => $this->navLinks, 'isLogin' => $this->isLogin, 'auth_url' => $this->auth_url]);
     }
 }
 

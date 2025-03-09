@@ -7,44 +7,28 @@ use Illuminate\Support\Facades\Route;
 use App\Models\CookieModel;
 
 // controller View
-use App\Http\Controllers\View\LoginController;
-use App\Http\Controllers\View\RegisterController;
 use App\Http\Controllers\View\LandingPageController;
-use App\Http\Controllers\View\OTPPageController;
-
-Route::get('/otp', function () {
-  return view('auth/otp');
-});
+use App\Http\Controllers\View\DashboardAdminController;
+use App\Http\Controllers\View\OrderFormUserController;
 
 if (!CookieModel::CheckCookie()) {
-  Route::get('/auth/login', [LoginController::class, 'index']);
-  Route::get('/auth/register', [RegisterController::class, 'index']);
-  Route::get('/auth/register/verify', [OTPPageController::class, 'index']);
+  Route::get('/auth/{random_string}', [App\Http\Controllers\View\AuthController::class, 'index'])->name('auth_page');
 }
 
 Route::get('/', [LandingPageController::class, 'index']);
 
 Route::middleware([CheckRole::class . ':admin'])->group(function () {
-  //
+  // Route::get('/', [DashboardAdminController::class, 'index']);
 });
 
 Route::middleware([CheckRole::class . ':user'])->group(function () {
-  //
+  Route::get('/order', [OrderFormUserController::class, 'index']);
 });
 
 
 // api
 Route::prefix('/api')->group(function () {
-  Route::post('/register', [App\Http\Controllers\RegisterController::class, 'register']);
-  Route::post('/register/otp', [App\Http\Controllers\RegisterController::class, 'verifyOTP']);
-  Route::resource('/login', App\Http\Controllers\LoginController::class);
+  Route::post('/verify/otp', [App\Http\Controllers\RegisterController::class, 'verifyOTP']);
+  Route::post('/register', [App\Http\Controllers\RegisterController::class, 'register'])->name('register');
+  Route::post('/login', [App\Http\Controllers\LoginController::class, 'Login'])->name('login');
 });
-
-// dev mode
-Route::get('/order', function () {
-  return view('./users/order');
-});
-
-// Route::get('/sendOTP', function () {
-//   Mail::to('olenggamer@gmail.com')->send(new OTPMail('test OTP'));
-// });

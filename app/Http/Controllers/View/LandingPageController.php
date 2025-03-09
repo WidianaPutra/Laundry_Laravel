@@ -5,6 +5,7 @@ namespace App\Http\Controllers\View;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\View\Component\Navbar;
+use Illuminate\Support\Str;
 
 class LandingPageController extends Controller
 {
@@ -76,6 +77,15 @@ class LandingPageController extends Controller
                 ],
             ]
         ];
+        if (!session()->has('auth_url')) {
+            session([
+                "auth_url" => [
+                    'login' => Str::random(50),
+                    'register' => Str::random(55),
+                    'otp' => Str::random(65),
+                ]
+            ]);
+        }
     }
     public function index()
     {

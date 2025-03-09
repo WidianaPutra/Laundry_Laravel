@@ -9,8 +9,9 @@
 </head>
 
 <body>
-    <h1>Hallo</h1>
-    <p>Kode OTP anda: {{ $otp }}</p>
+    <img src="./assets/icons/logo.svg" alt="" style="height: auto; width: 100%;">
+    <h1>Hallo, {{ $username }}</h1>
+    <p>Kode OTP anda: <span style="font-weight: bold">{{ $otp }}</span></p>
     <p>Kode ini berlaku selama 5 menit. Jangan berikan kode ini kepada siapa pun. Jika Anda tidak meminta kode ini,
         abaikan email ini.</p>
     <p>Terimakasih,</p>
