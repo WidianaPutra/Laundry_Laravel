@@ -18,7 +18,7 @@
                 <p><span class="text-red-500">*</span> {{ session('error') }}</p>
             @endif
 
-            <form action="/api/verify/otp" method="POST" class="mt-6">
+            <form action="{{ route('verify_otp') }}" method="POST" class="mt-6">
                 @csrf
                 <label for="code" class="block text-lg font-medium text-gray-700">Masukan kode otp</label>
                 <input type="text" id="code" name="otp"
@@ -27,7 +27,8 @@
                 <p> Belum menerima kode?
                     <a href="" class="text-green-600 text-md mt-2 hover:underline">Kirim ulang</a>
                 </p>
-                <a href="" class="text-green-600 text-md mt-2 hover:underline">Ganti alamat Email</a>
+                <a href="{{ route('resend-otp') }}" class="text-green-600 text-md mt-2 hover:underline">Ganti alamat
+                    Email</a>
 
                 <button type="submit"
                     class="mt-6 w-full bg-green-600 text-white text-lg py-3 rounded-md hover:bg-green-700">Next</button>

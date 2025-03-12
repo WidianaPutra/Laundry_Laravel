@@ -1,24 +1,7 @@
 <x-layout :title="'Altelier Laundry'">
     {{-- welcome page --}}
-    <div class="bg-image h-screen w-full flex items-center">
-        <div class="pl-[8%] pr-[5%] w-full sm:w-[60%]">
-            <h1 class="text-white text-[33px] sm:text-[40px] md:text-[55px] font-bold" id="title"></h1>
-            <div data-aos="fade-right" data-aos-duration="1200" data-aos-delay="400">
-                <p class="text-white text-[14px] sm:text-[18px]">
-                    Layanan laundry Express, Leguler, hingga EX-Tra dengan hasil bersih,
-                    wangi, dan rapi. Antar-jemup gratis, harga terjangkau! Percayakan pada tangan ahli kami. Pesan
-                    sekarang,
-                    kami yang urus!
-                </p>
-                <div
-                    class="flex bg-green-600 py-1 px-3 mt-4 w-max items-center 
-                    rounded-[10px] cursor-pointer hover:bg-green-700">
-                    <img src="./assets/icons/whatsapp.svg" alt="" class="sm:w-[50px] w-[25px] h-auto">
-                    <p class="text-white sm:text-[18px] text-[13px]">Hubungi Kami</p>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{-- @yield('welcome') --}}
+    @include('landing_page.welcome')
 
     {{-- about page --}}
     <div
@@ -61,22 +44,6 @@
                             </div>
                         </div>
                     </ul>
-
-                    {{-- <div class="flex w-full justify-between mt-10">
-                        <div>
-                            <h1 class="text-center text-xl font-bold mb-5">Total Cabang</h1>
-                            <h1 class="text-center font-bold text-xl">8</h1>
-                        </div>
-                        <div>
-                            <h1 class="text-center text-xl font-bold mb-5">Total Mitra</h1>
-                            <h1 class="text-center font-bold text-xl">7</h1>
-                        </div>
-                        <div>
-                            <h1 class="text-center text-xl font-bold mb-5">Total Karyawan</h1>
-                            <h1 class="text-center font-bold text-xl">80</h1>
-                        </div>
-                    </div> --}}
-
                     <p class="text-[15px] sm:text-[20px] pt-4">Tak perlu khawatir jadwal padat atau waktu terbatas.
                         Antar-jemput
                         GRATIS,
@@ -180,19 +147,3 @@
         </div>
     </footer>
 </x-layout>
-
-<script>
-    new Typed('#title', {
-        strings: ['Atelier Laundry'],
-        showCursor: false,
-        typeSpeed: 60,
-        startDelay: 200
-    })
-
-    new Typed('#value_tagline', {
-        strings: ["Kepuasan anda <br> adalah prioritas kami"],
-        showCursor: false,
-        typeSpeed: 50,
-        startDelay: 800
-    })
-</script>

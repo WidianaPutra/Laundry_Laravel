@@ -12,8 +12,7 @@
         {{ $slot }}
     </div>
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
-    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    {{-- <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script> --}}
     {{-- <script src="./js/global.js"></script> --}}
     <script>
         AOS.init({

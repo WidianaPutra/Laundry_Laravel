@@ -21,7 +21,7 @@ class CookieModel extends Model
     }
     public static function setUserCookie($id, $username, $email, $role)
     {
-        self::setCookie('id', $id);
+        self::setCookie('user_id', $id);
         self::setCookie('username', $username);
         self::setCookie('email', $email);
         self::setCookie('role', $role);
@@ -36,8 +36,9 @@ class CookieModel extends Model
 
     public static function removeUserCookie()
     {
-        self::removeCookie('id');
+        self::removeCookie('user_id');
         self::removeCookie('username');
         self::removeCookie('email');
+        self::removeCookie('role');
     }
 }

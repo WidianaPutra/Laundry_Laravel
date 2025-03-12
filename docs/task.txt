@@ -1,11 +1,16 @@
-navbar ✅
-login register ✅
-landing page ✅
+task
 
-admin dashboard ....
-edit order UI ....
-orders UI ....
-history UI ....
-Kurir UI ....
+halaman ubah password
+ -> form password lama
+ -> form password baru
+ -> form konfirmasi password baru
+ file: resources/views/auth/resetPassword/resetPassword.blade.php
 
-Backend ....
+halaman lupa password
+ -> hanya form email
+ file: resources/views/auth/forgetPassword/reset_password_request.blade.php
+
+ pisah sama
+ -> form password baru
+ -> form konfirmasi password baru
+ file: resources/views/auth/forgetPassword/new_password.blade.php

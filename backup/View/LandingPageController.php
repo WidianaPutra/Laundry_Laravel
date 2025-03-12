@@ -77,15 +77,7 @@ class LandingPageController extends Controller
                 ],
             ]
         ];
-        if (!session()->has('auth_url')) {
-            session([
-                "auth_url" => [
-                    'login' => Str::random(50),
-                    'register' => Str::random(55),
-                    'otp' => Str::random(65),
-                ]
-            ]);
-        }
+
     }
     public function index()
     {

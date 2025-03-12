@@ -12,8 +12,11 @@
                 <h2 class="text-2xl font-semibold text-gray-700 text-center">Login</h2>
                 <p class="text-gray-500 text-center mb-6">Welcome back! Please login to your account.</p>
 
-                <form action="" method="POST">
+                <form action="{{ route('login') }}" method="POST">
                     @csrf
+                    @if (session('error'))
+                        <p class="p-0 m-0"><span class="text-red-500">*</span> {{ session('error') }}</p>
+                    @endif
                     <div class="mb-4">
                         <label class="block text-gray-600" for="email">Email</label>
                         <input type="text" id="email" name="email" placeholder="example@gmail.com"
@@ -25,10 +28,6 @@
                             class="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
                     </div>
                     <div class="flex justify-between items-center mb-4">
-                        <!-- <label class="flex items-center">
-                            <input type="checkbox" class="form-checkbox text-blue-500">
-                            <span class="ml-2 text-gray-600">Remember Me</span>
-                        </label> -->
                         <a href="#" class="text-blue-500 text-sm">Forgot Password?</a>
                     </div>
                     <button type="submit"

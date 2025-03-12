@@ -1,23 +1,29 @@
 <?php
 
-namespace App\Http\Controllers\View;
+namespace App\Http\Controllers\View\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\CookieModel;
 use Illuminate\Http\Request;
 use ILluminate\Support\Facades\Session;
 use Illuminate\Support\Str;
 
-class AuthController extends Controller
+class AuthViewController extends Controller
 {
     public $auth_options;
     public function index($randomString)
     {
+        if (CookieModel::CheckCookie()) {
+            return redirect('/');
+        }
         if (session('auth_url.login') == $randomString) {
             $this->auth_options = '/auth/login';
+            session(['auth_page' => 'login']);
             return view('auth.login', ['rndm_url' => $randomString]);
         }
         if (session('auth_url.register') == $randomString) {
             $this->auth_options = '/auth/register';
+            session(['auth_page' => 'register']);
             return view('auth.register', ['rndm_url' => $randomString]);
         }
         if (session('auth_url.otp') == $randomString && session('user_data') && session('otp')) {

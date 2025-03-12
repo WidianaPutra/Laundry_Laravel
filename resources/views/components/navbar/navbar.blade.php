@@ -35,10 +35,10 @@
                 @endforeach
             @else
                 <div class="flex flex-col gap-4 w-full justify-center px-5 cursor-pointer mt-5">
-                    <a href="{{ route('auth_page', ['random_string' => $auth_url['login']]) }}"
+                    {{-- <a href="{{ route('auth_page', ['random_string' => $auth_url['login']]) }}"
                         class="bg-green-500 text-white py-2 px-4 rounded-[5px] w-max">Login</a>
                     <a href="{{ route('auth_page', ['random_string' => $auth_url['register']]) }}"
-                        class="bg-green-500 text-white py-2 px-4 rounded-[5px] w-max">Register</a>
+                        class="bg-green-500 text-white py-2 px-4 rounded-[5px] w-max">Register</a> --}}
                 </div>
             @endif
         </div>

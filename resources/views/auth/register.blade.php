@@ -1,5 +1,4 @@
 <x-layout :title="'login'" :navbar="'hide'">
-    {{-- @dd(session('error')) --}}
     <div class="flex w-full min-h-screen justify-center items-center bg-gray-100 p-7">
         <div class="sm:flex-row flex flex-col w-full max-w-4xl bg-white rounded-lg shadow-lg overflow-hidden">
             <!-- Left Side -->

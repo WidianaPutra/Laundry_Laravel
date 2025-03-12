@@ -1,12 +1,12 @@
 <?php
 
-namespace App\View\Components\LandingPage;
+namespace App\View\Components\Sidebar;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class WelcomePage extends Component
+class siderbar extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class WelcomePage extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.landing-page.welcome-page');
+        return view('components.sidebar.siderbar');
     }
 }
