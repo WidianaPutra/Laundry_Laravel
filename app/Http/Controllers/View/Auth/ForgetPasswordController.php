@@ -9,6 +9,7 @@ class ForgetPasswordController extends Controller
 {
     public function index()
     {
-        return view('auth.forgetPassword.forget_password_request');
+        // return view('auth.forgetPassword.forget_password_request');
+        return view('auth.forgetPassword.new_password');
     }
 }

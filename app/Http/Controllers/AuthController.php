@@ -88,6 +88,51 @@ class AuthController extends Controller
         $otpURL = session('auth_url.otp');
         return redirect("/auth/$otpURL");
     }
+
+    public function forgetPassword(Request $request)
+    {
+        // user sudah memasukan email
+        if (session()->has('user_data')) {
+            if (strlen($request->input('new-password')) < 7) {
+                return redirect('/auth/' . session('auth_url.forget_password'))->with('error', 'Password must be more then 7 characters long');
+            }
+
+            $request->validate([
+                'new-password' => 'required|string|min:8',
+                'confirm-password' => 'required|string|min:8',
+            ]);
+
+            if ($request->input('new-password') !== $request->input('confirm-password')) {
+                return redirect('/auth/' . session('auth_url.forget_password'))->with('error', 'Password dan Confirm password does not match');
+            }
+
+            UsersModel::where('email', '=', session('user_data.email'))->update([
+                'password' => $request->input('password')
+            ]);
+
+            session()->forget('user_data');
+            return redirect('/');
+        }
+
+        // user belum memasukan email
+        $request->validate(['email' => 'required|string|email']);
+
+        $data = UsersModel::where('email', '=', $request->input('email'))->first();
+
+        if ($data == null) {
+            return redirect('/auth/' . session('auth_url.forget_password'))->with('error', 'Email not found');
+        }
+
+        session([
+            'user_data' => [
+                'email' => $request->input('email'),
+                'expire_time' => now()->addMinutes(5)
+            ]
+        ]);
+
+        $this->generateOTP();
+        return redirect("/auth/" . session("auth_url.otp"));
+    }
     public function verifyOTP(Request $request)
     {
         $request->validate([
@@ -96,11 +141,6 @@ class AuthController extends Controller
 
         $this->authURL = session('auth_url');
         $this->auth_page = session('auth_page');
-
-        // var_dump([
-        //     'auth_url' => session('auth_url'),
-        //     'auth_page' => session('auth_page')
-        // ]);
 
         if (!session()->has('otp')) {
             return redirect('/auth/' . $this->authURL[$this->auth_page])->with('error', 'OTP code was expire');
@@ -115,6 +155,7 @@ class AuthController extends Controller
             return redirect('/auth/' . $this->authURL['otp'])->with('error', "OTP code doesn't match");
         }
 
+        // page
         if ($this->auth_page == 'register') {
             UsersModel::create(session('user_data'));
             $user = UsersModel::where('email', '=', session('user_data.email'))->first();
@@ -127,11 +168,19 @@ class AuthController extends Controller
                 session('user_data.username'),
                 session('user_data.role')
             );
-            // var_dump(['user_data' => session('user_data')]);
-            // return;
         }
+        if ($this->auth_page == "forget_password") {
+            return redirect('/auth/' . session('auth_url.forget_password'));
+        }
+
         session()->forget(['otp', 'user_data']);
         return redirect('/');
+    }
+
+    public function resendOTP()
+    {
+        $this->generateOTP();
+        return redirect('/auth/' . session('auth_url.otp'));
     }
 
     public function generateOTP()

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\View;
+namespace App\Http\Controllers\View\User;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class OrderFormUserController extends Controller
+class OrderFormView extends Controller
 {
     public function index()
     {

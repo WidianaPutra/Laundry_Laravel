@@ -28,7 +28,7 @@
                             class="w-full px-4 py-2 mt-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400">
                     </div>
                     <div class="flex justify-between items-center mb-4">
-                        <a href="#" class="text-blue-500 text-sm">Forgot Password?</a>
+                        <a href="{{ $forget_password }}" class="text-blue-500 text-sm">Forgot Password?</a>
                     </div>
                     <button type="submit"
                         class="w-full bg-blue-400 hover:bg-blue-600 text-white py-2 rounded-lg transition">Login</button>

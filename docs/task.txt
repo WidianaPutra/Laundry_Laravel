@@ -14,3 +14,16 @@ halaman lupa password
  -> form password baru
  -> form konfirmasi password baru
  file: resources/views/auth/forgetPassword/new_password.blade.php
+
+
+
+
+
+
+
+
+
+
+
+/userCookie/{role} untuk login otomatis
+contoh: /userCookie/admin -> untuk login otomatis dan dapat role admin

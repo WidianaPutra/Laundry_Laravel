@@ -12,6 +12,7 @@ class DashboardViewController extends Controller
 {
     public $role = 'user';
     public $view_data = [];
+    public $menu;
     public function AuthURL()
     {
         if (!session()->has('auth_url')) {
@@ -20,14 +21,17 @@ class DashboardViewController extends Controller
                     'login' => Str::random(50),
                     'register' => Str::random(55),
                     'otp' => Str::random(65),
+                    'forget_password' => Str::random(60),
+                    'update_password' => Str::random(61)
                 ]
             ]);
         }
         $this->role = CookieModel::getCookie("role") ?? 'user';
     }
-    public function index()
+    public function index(Request $requset)
     {
         $this->AuthURL();
+        $this->menu = $requset->query('menu');
         $viewData = [
             'user' => $this->LandingPage(),
             'admin' => $this->AdminData(),
@@ -40,17 +44,53 @@ class DashboardViewController extends Controller
             'user' => 'users.landingPage'
         ];
 
+        // $rules = ['order'];
+        // if ($this->role === 'user' && in_array($menu, $rules)) {
+        //     return view('users.landingPage', $viewData['user']);
+        // }
+
         return view($views[$this->role] ?? 'landingPage', $viewData[$this->role]);
     }
 
     public function AdminData()
     {
-        return [];
+        return [
+            'table_datas' => [
+                'No',
+                'Username',
+                'Order Status',
+                'Total Berat',
+                'Payment Status',
+                'Total Harga'
+            ],
+            'sidebar_datas' => [
+                ['name' => 'Orders', 'url' => '/orders', 'icon' => '', 'view' => 'component.'],
+                ['name' => 'complated', 'url' => '/complated', 'icon' => '', 'view' => 'component.'],
+                ['name' => 'Setting', 'url' => '/setting', 'icon' => '', 'view' => 'component.']
+            ],
+            'menu' => $this->menu,
+            'order_datas' => []
+        ];
     }
 
     public function CourierData()
     {
-        return [];
+        return [
+            'table_datas' => [
+                'No',
+                'Username',
+                'No Telfon',
+                'Alamat',
+                'Status',
+            ],
+            'sidebar_datas' => [
+                ['name' => 'Dashboard', 'url' => '', 'icon' => '', 'view' => 'component.'],
+                ['name' => 'Orders', 'url' => '', 'icon' => '', 'view' => 'component.'],
+                ['name' => 'Setting', 'url' => '', 'icon' => '', 'view' => 'component.']
+            ],
+            'menu' => $this->menu,
+            'order_datas' => []
+        ];
     }
 
     public function LandingPage()

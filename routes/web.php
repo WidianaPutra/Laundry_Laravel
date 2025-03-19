@@ -8,9 +8,9 @@ use App\Models\CookieModel;
 
 // controller View
 use App\Http\Controllers\View\User\DashboardViewController;
-use App\Http\Controllers\View\OrderFormUserController;
+use App\Http\Controllers\View\User\OrderFormView;
 use App\Http\Controllers\View\Auth\AuthViewController;
-use App\Http\Controllers\View\Auth\ResetPasswordController;
+use App\Http\Controllers\View\Auth\UpdatePasswordController;
 use App\Http\Controllers\View\Auth\ForgetPasswordController;
 
 // api
@@ -22,11 +22,12 @@ Route::get('/auth/{random_string}', [AuthViewController::class, 'index'])->name(
 Route::middleware([CheckRole::class . ':admin'])->group(function () {
 });
 
-// Route::middleware([CheckRole::class . ':user'])->group(function () {
-Route::get('/order', [OrderFormUserController::class, 'index']);
-Route::get('/resetPassword', [ResetPasswordController::class, 'index'])->name('resetPassword');
-Route::get('/forgetPassword', [ForgetPasswordController::class, 'index'])->name('forgetPassword');
-// });
+Route::middleware([CheckRole::class . ':user'])->group(function () {
+  Route::get('/order', [OrderFormView::class, 'index']);
+  Route::get('/resetPassword', [UpdatePasswordController::class, 'index'])->name('resetPassword');
+  Route::get('/forgetPassword', [ForgetPasswordController::class, 'index'])->name('forgetPassword');
+});
+
 
 // api
 Route::prefix('/api')->group(function () {
@@ -34,12 +35,19 @@ Route::prefix('/api')->group(function () {
   Route::post('/verify/otp', [AuthController::class, 'verifyOTP'])->name('verify_otp');
   Route::post('/register', [AuthController::class, 'register'])->name('register');
   Route::post('/login', [AuthController::class, 'login'])->name('login');
-  Route::post('/resend-otp', [AuthController::class, 'generateOTP'])->name('resend-otp');
+  Route::get('/resend-otp', [AuthController::class, 'resendOTP'])->name('resend-otp');
+  Route::post('/forget-password', [AuthController::class, 'forgetPassword'])->name('api/forget-password');
 });
 
-Route::get('/admin', function () {
-  return view('admin.dashboard');
-});
+
+
+
+
+
+
+
+
+
 
 // dev
 Route::get('/removeCookie', function () {
@@ -48,25 +56,30 @@ Route::get('/removeCookie', function () {
 });
 
 Route::get('/checkCookie', function () {
-  if (CookieModel::getCookie('user_id') && CookieModel::getCookie('role')) {
-    var_dump([
-      'username' => CookieModel::getCookie('username'),
-      'role' => CookieModel::getCookie('role'),
-      'email' => CookieModel::getCookie('email'),
-      'user_id' => CookieModel::getCookie('user_id'),
-    ]);
-  }
-  return;
+  var_dump([
+    'username' => CookieModel::getCookie('username'),
+    'role' => CookieModel::getCookie('role'),
+    'email' => CookieModel::getCookie('email'),
+    'user_id' => CookieModel::getCookie('user_id'),
+  ]);
 });
 
 Route::get('/showAuthURL', function () {
-  var_dump([
-    'login' => session('auth_url.login'),
-    'register' => session('auth_url.register'),
-    'otp' => session('auth_url.otp')
-  ]);
+  var_dump(session('auth_url'));
 });
 
 Route::get('/showOTP', function () {
   var_dump(session('otp'));
 });
+
+Route::get('/userCookie/{role?}', function ($role = 'user') {
+  CookieModel::setUserCookie('1', 'developer', 'developer@gamil.com', $role);
+  return redirect('/');
+});
+
+Route::get('/custom', function ($role = 'user') {
+  session()->forget('user_data');
+  return redirect('/');
+});
+
+

@@ -25,9 +25,10 @@
                     class="mt-2 block w-full px-4 py-2 text-lg border border-gray-300 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                     required>
                 <p> Belum menerima kode?
-                    <a href="" class="text-green-600 text-md mt-2 hover:underline">Kirim ulang</a>
+                    <a href="{{ route('resend-otp') }}" class="text-green-600 text-md mt-2 hover:underline">Kirim
+                        ulang</a>
                 </p>
-                <a href="{{ route('resend-otp') }}" class="text-green-600 text-md mt-2 hover:underline">Ganti alamat
+                <a href="{{ $backUrl }}" class="text-green-600 text-md mt-2 hover:underline">Ganti alamat
                     Email</a>
 
                 <button type="submit"

@@ -20,9 +20,9 @@ class CheckRole
         $allowedRoles = explode(',', $roles);
 
         if (!in_array($userRole, $allowedRoles)) {
-            if (!CookieModel::CheckCookie() && $roles === 'user') {
-                return redirect('/')->with('err', 'Unauthorized');
-            }
+            // if (!CookieModel::CheckCookie() && $roles === 'user') {
+            //     return redirect('/')->with('err', 'Unauthorized');
+            // }
             return redirect('/')->with('err', 'Unauthorized');
         }
         return $next($request);
