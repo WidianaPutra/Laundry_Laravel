@@ -37,23 +37,23 @@ Route::prefix('/api')->group(function () {
   Route::post('/login', [AuthController::class, 'login'])->name('login');
   Route::get('/resend-otp', [AuthController::class, 'resendOTP'])->name('resend-otp');
   Route::post('/forget-password', [AuthController::class, 'forgetPassword'])->name('api/forget-password');
+
+  Route::get('/users', function () {
+    $userDatas = App\Models\UsersModel::all();
+    return response()->json(['status' => 'test', 'user_data' => $userDatas], 200);
+  });
 });
 
-
-
-
-
-
-
-
-
-
+Route::get('/addOrder', function () {
+  return view('admin.addOrder');
+});
 
 // dev
 Route::get('/removeCookie', function () {
   CookieModel::removeUserCookie();
   return redirect('/');
 });
+
 
 Route::get('/checkCookie', function () {
   var_dump([

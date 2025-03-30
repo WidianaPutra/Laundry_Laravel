@@ -1,5 +1,7 @@
 import "./bootstrap";
 import "aos/dist/aos.css";
+import "./leafltet";
+
 import Typed from "typed.js";
 import AOS from "aos";
 

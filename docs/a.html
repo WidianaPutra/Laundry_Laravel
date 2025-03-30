@@ -1,0 +1,114 @@
+<!-- <!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Pilih Lokasi</title>
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet/dist/leaflet.css"
+        />
+        <style>
+            #map {
+                height: 100vh;
+                width: 100%;
+            }
+            button {
+                margin-top: 10px;
+                padding: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <h2>Pilih Lokasi Anda</h2>
+        <button onclick="getLocation()">Gunakan GPS</button>
+        <div id="map"></div>
+        <p>Latitude: <span id="latitude"></span></p>
+        <p>Longitude: <span id="longitude"></span></p>
+
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+        <script>
+            let map = L.map("map").setView([-8.628874, 115.176189], 20); // Default Jakarta
+            // 8.628874, 115.176189;
+
+            L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+                attribution: "&copy; OpenStreetMap contributors",
+            }).addTo(map);
+
+            let marker;
+
+            // Fungsi ketika user mengklik peta untuk memilih lokasi
+            function onMapClick(e) {
+                if (marker) {
+                    map.removeLayer(marker);
+                }
+                marker = L.marker(e.latlng).addTo(map);
+                document.getElementById("latitude").innerText = e.latlng.lat;
+                document.getElementById("longitude").innerText = e.latlng.lng;
+            }
+
+            map.on("click", onMapClick);
+
+            // Fungsi untuk mendapatkan lokasi GPS otomatis
+            function getLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(function (
+                        position
+                    ) {
+                        let lat = position.coords.latitude;
+                        let lon = position.coords.longitude;
+
+                        document.getElementById("latitude").innerText = lat;
+                        document.getElementById("longitude").innerText = lon;
+
+                        map.setView([lat, lon], 15);
+                        if (marker) {
+                            map.removeLayer(marker);
+                        }
+                        marker = L.marker([lat, lon]).addTo(map);
+                    });
+                } else {
+                    alert("Geolocation tidak didukung oleh browser ini.");
+                }
+            }
+        </script>
+    </body>
+</html> -->
+
+<script
+    async
+    defer
+    src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initMap"
+></script>
+
+<div id="map" style="height: 400px"></div>
+
+<script>
+    function initMap() {
+        let map = new google.maps.Map(document.getElementById("map"), {
+            center: { lat: -6.2, lng: 106.816666 },
+            zoom: 13,
+        });
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition((position) => {
+                let pos = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude,
+                };
+
+                new google.maps.Marker({
+                    position: pos,
+                    map: map,
+                    title: "Lokasi Anda",
+                });
+
+                map.setCenter(pos);
+            }, showError);
+        }
+    }
+
+    function showError(error) {
+        alert("Gagal mendapatkan lokasi: " + error.message);
+    }
+</script>

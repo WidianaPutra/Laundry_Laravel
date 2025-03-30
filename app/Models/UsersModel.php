@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class UsersModel extends Model
 {
     protected $table = 'users';
-    protected $fillable = ['username', 'email', 'password', 'address', 'phone_number', 'user_img'];
+    protected $fillable = ['username', 'email', 'password', 'address', 'phone_number', 'user_img', 'longitude', 'latitude'];
 
 
     public static function createData($datas)

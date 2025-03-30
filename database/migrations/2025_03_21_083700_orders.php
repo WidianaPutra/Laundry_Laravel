@@ -13,10 +13,11 @@ return new class extends Migration {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('uid')->unique();
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
+            $table->foreignId('user_id')->nullable()->constrained('users')->nullOnDelete();
+            $table->string('username')->nullable();
             $table->string('order_status');
             $table->integer('total_weight');
-            $table->foreignId('transaction_id')->nullable()->constrained('transactions')->onDelete('set null');
+            $table->foreignId('transaction_id')->nullable()->constrained('transactions')->nullOnDelete();
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('orders');
     }
 };

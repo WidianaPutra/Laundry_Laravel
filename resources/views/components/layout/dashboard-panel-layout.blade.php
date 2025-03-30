@@ -23,7 +23,7 @@
         </div>
 
         <!-- Main Content -->
-        <div class="flex-1 flex flex-col">
+        <div class="flex-1 flex flex-col overflow-y-scroll">
             <!-- Header -->
             <header class="bg-white shadow p-4 flex justify-between items-center">
                 <h1 class="text-xl font-semibold">Dashboard</h1>
@@ -31,7 +31,7 @@
             </header>
 
             <!-- Content -->
-            <main class="p-6">{{ $slot }}</main>
+            <main class="p-6 ">{{ $slot }}</main>
         </div>
     </div>
 </x-layout>

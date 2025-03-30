@@ -10,13 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('rates', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
-            $table->foreignId('user_id')->constrained('users')->onDelete('cascade');
-            $table->float('rate');
-            $table->string('note')->nullable();
-            $table->string('img_url')->nullable();
+            $table->foreignId('order_id')->constrained('orders')->cascadeOnDelete();
+            $table->string('payment_method');
+            $table->string('payment_status')->default('waiting');
+            $table->float('amount');
             $table->timestamps();
         });
     }
@@ -26,6 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('transactions');
     }
 };

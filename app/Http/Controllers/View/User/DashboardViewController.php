@@ -13,6 +13,7 @@ class DashboardViewController extends Controller
     public $role = 'user';
     public $view_data = [];
     public $menu;
+    private $req;
     public function AuthURL()
     {
         if (!session()->has('auth_url')) {
@@ -30,6 +31,7 @@ class DashboardViewController extends Controller
     }
     public function index(Request $requset)
     {
+        $this->req = $requset;
         $this->AuthURL();
         $this->menu = $requset->query('menu');
         $viewData = [
@@ -43,11 +45,6 @@ class DashboardViewController extends Controller
             'courier' => 'courier.dashboard',
             'user' => 'users.landingPage'
         ];
-
-        // $rules = ['order'];
-        // if ($this->role === 'user' && in_array($menu, $rules)) {
-        //     return view('users.landingPage', $viewData['user']);
-        // }
 
         return view($views[$this->role] ?? 'landingPage', $viewData[$this->role]);
     }
@@ -64,12 +61,14 @@ class DashboardViewController extends Controller
                 'Total Harga'
             ],
             'sidebar_datas' => [
-                ['name' => 'Orders', 'url' => '/orders', 'icon' => '', 'view' => 'component.'],
-                ['name' => 'complated', 'url' => '/complated', 'icon' => '', 'view' => 'component.'],
-                ['name' => 'Setting', 'url' => '/setting', 'icon' => '', 'view' => 'component.']
+                ['name' => 'Orders', 'url' => '/', 'icon' => '', 'view' => 'component.'],
+                ['name' => 'complated', 'url' => '/?page=complated', 'icon' => '', 'view' => 'component.'],
+                ['name' => 'New Order', 'url' => '/?page=addOrder', 'icon' => '', 'view' => 'component.'],
+                ['name' => 'Setting', 'url' => '/?page=setting', 'icon' => '', 'view' => 'component.']
             ],
             'menu' => $this->menu,
-            'order_datas' => []
+            'order_datas' => [],
+            'qeury_params' => $this->req->query('page')
         ];
     }
 

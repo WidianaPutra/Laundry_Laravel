@@ -19,7 +19,7 @@ return new class extends Migration {
             $table->string('phone_number');
             $table->string('role')->default('user');
             $table->string('user_img')->nullable();
-            $table->timestamps(); 
+            $table->timestamps();
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('users');
     }
 };
